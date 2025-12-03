@@ -1,6 +1,5 @@
 package laboratory_problems.problems_04;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -10,10 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 public class TermFrequencyTest {
@@ -64,10 +60,6 @@ class TermFrequency {
         return distinct.size();
     }
 
-    public Set<String> getAsSet() {
-        return new HashSet<>(words);
-    }
-
     public Map<String, Integer> getFrequency() {
         Map<String, Integer> frequency = new TreeMap<>();
         for (String s : words) {
@@ -80,21 +72,15 @@ class TermFrequency {
     public List<String> mostOften(int k) {
         Map<String, Integer> frequency = getFrequency();
 
-        List<Map.Entry<String, Integer>> entries = frequency.entrySet().stream().sorted(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> e1,
-                               Map.Entry<String, Integer> e2) {
-                int cmp = e2.getValue().compareTo(e1.getValue());
-                if (cmp != 0) return cmp;
-                return e1.getKey().compareTo(e2.getKey());
-            }
+        List<Map.Entry<String, Integer>> entries = frequency.entrySet().stream().sorted((e1, e2) -> {
+            int cmp = e2.getValue().compareTo(e1.getValue());
+            if (cmp != 0) return cmp;
+            return e1.getKey().compareTo(e2.getKey());
         }).toList();
 
         List<String> result = new ArrayList<>();
         int limit = Math.min(k, entries.size());
-        for (int i = 0; i < limit; i++) {
-            result.add(entries.get(i).getKey());
-        }
+        for (int i = 0; i < limit; i++) result.add(entries.get(i).getKey());
         return result;
     }
 
