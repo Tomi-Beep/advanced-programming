@@ -1,4 +1,4 @@
-package exam_problems.p04_generics_and_lambda;
+package exam_problems.p04_generics_lambda;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
