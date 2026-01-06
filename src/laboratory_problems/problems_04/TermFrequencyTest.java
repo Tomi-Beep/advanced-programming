@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+
+
 public class TermFrequencyTest {
     public static void main(String[] args) throws FileNotFoundException {
         String[] stop = new String[]{"во", "и", "се", "за", "ќе", "да", "од",
